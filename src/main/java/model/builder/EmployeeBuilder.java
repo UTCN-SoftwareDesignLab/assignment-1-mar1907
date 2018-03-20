@@ -9,8 +9,8 @@ public class EmployeeBuilder {
 
     private Employee employee;
 
-    public EmployeeBuilder(Employee employee) {
-        this.employee = employee;
+    public EmployeeBuilder() {
+        employee = new Employee();
     }
 
     public EmployeeBuilder setID(Long id){

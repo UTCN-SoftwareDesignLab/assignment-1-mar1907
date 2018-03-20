@@ -6,8 +6,8 @@ public class AccountBuilder {
 
     protected Account account;
 
-    public AccountBuilder(Account account) {
-        this.account = account;
+    public AccountBuilder() {
+        account = new Account();
     }
 
     public AccountBuilder setID(Long id){

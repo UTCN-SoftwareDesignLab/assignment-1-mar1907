@@ -10,8 +10,8 @@ public class ClientBuilder {
 
     private Client client;
 
-    public ClientBuilder(Client client) {
-        this.client = client;
+    public ClientBuilder() {
+        client = new Client();
     }
 
     public ClientBuilder setId(Long id){

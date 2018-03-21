@@ -110,6 +110,19 @@ public class RightsRolesRepositoryMySQL implements RightsRolesRepository {
     }
 
     @Override
+    public void updateEmployeeRoles(Employee employee, List<Role> roles){
+        try{
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM " + EMPLOYEE_ROLE + " WHERE employee_id=?");
+            preparedStatement.setLong(1, employee.getId());
+            preparedStatement.executeUpdate();
+            addRolesToEmployee(employee, roles);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public List<Role> findRolesForEmployee(Long id) {
         try {
             List<Role> roles = new ArrayList<>();

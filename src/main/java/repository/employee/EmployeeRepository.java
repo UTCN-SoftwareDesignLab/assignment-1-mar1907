@@ -13,5 +13,7 @@ public interface EmployeeRepository {
 
     boolean save(Employee employee);
 
+    boolean update(Employee employee);
+
     void removeAll();
 }

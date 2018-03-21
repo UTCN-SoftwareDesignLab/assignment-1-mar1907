@@ -1,8 +1,14 @@
 package database;
 
 
+import model.Employee;
+
+import java.lang.reflect.Array;
 import java.util.*;
 
+import static database.Constants.Employees.ADMIN_USER;
+import static database.Constants.Employees.EMPLOYEES;
+import static database.Constants.Employees.EMP_USER;
 import static database.Constants.Rights.*;
 import static database.Constants.Roles.*;
 
@@ -51,6 +57,23 @@ public class Constants {
 
         public static final String[] RIGHTS = new String[]{MANAGE_CLIENT, MANAGE_ACCOUNT, TRANSFER, PROCESS_BILL,
                 CRUD_EMPLOYEE, GENERATE_REPORTS};
+    }
+
+    public static class Employees {
+        public static final List<String> ADMIN_USER = new ArrayList<>(Arrays.asList("Admin User", "parola"));
+        public static final List<String > EMP_USER = new ArrayList<>(Arrays.asList("Emp User", "parola2"));
+
+        public static final List<List<String>> EMPLOYEES = new ArrayList<>(Arrays.asList(ADMIN_USER, EMP_USER));
+    }
+
+    public static Map<List<String>, List<String >> getEmployeeRoles(){
+        Map<List<String>, List<String >> EMPLOYEE_ROLES = new HashMap<>();
+        for(List<String > e : EMPLOYEES){
+            EMPLOYEE_ROLES.put(e, new ArrayList<>());
+        }
+        EMPLOYEE_ROLES.get(ADMIN_USER).add(ADMINISTRATOR);
+        EMPLOYEE_ROLES.get(EMP_USER).add(EMPLOYEE);
+        return EMPLOYEE_ROLES;
     }
 
     public static Map<String, List<String>> getRolesRights() {

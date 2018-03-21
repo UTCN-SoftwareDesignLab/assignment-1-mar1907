@@ -52,9 +52,12 @@ public class EmployeeRepositoryMySQL implements EmployeeRepository {
         try {
             PreparedStatement statement = connection.prepareStatement(
                     "Select * from `" + EMPLOYEE + "` where `username`=? and `password`=?");
+            statement.setString(1, name);
+            statement.setString(2, password);
             ResultSet employeeResultSet = statement.executeQuery();
             if(employeeResultSet.next()){
                 Employee user = new EmployeeBuilder()
+                        .setID(employeeResultSet.getLong("id"))
                         .setUsername(employeeResultSet.getString("username"))
                         .setPassword(employeeResultSet.getString("password"))
                         .setRolesList(rightsRolesRepository.findRolesForEmployee(employeeResultSet.getLong("id")))
@@ -75,7 +78,7 @@ public class EmployeeRepositoryMySQL implements EmployeeRepository {
     public boolean save(Employee employee) {
         try {
             PreparedStatement insertEmployeeStatement = connection
-                    .prepareStatement("INSERT INTO" + EMPLOYEE + "values (null, ?, ?)");
+                    .prepareStatement("INSERT INTO " + EMPLOYEE + " values (null, ?, ?)");
             insertEmployeeStatement.setString(1, employee.getUsername());
             insertEmployeeStatement.setString(2, employee.getPassword());
             insertEmployeeStatement.executeUpdate();
@@ -89,6 +92,25 @@ public class EmployeeRepositoryMySQL implements EmployeeRepository {
 
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean update(Employee employee){
+        try{
+            PreparedStatement updateEmployeeStatement = connection
+                    .prepareStatement("UPDATE " + EMPLOYEE + " SET username=?, password=? WHERE id=?;");
+            updateEmployeeStatement.setString(1, employee.getUsername());
+            updateEmployeeStatement.setString(2, employee.getPassword());
+            updateEmployeeStatement.setInt(3, employee.getId().intValue());
+            updateEmployeeStatement.executeUpdate();
+
+            rightsRolesRepository.updateEmployeeRoles(employee, employee.getRoles());
+
+            return true;
+        } catch (SQLException e){
             e.printStackTrace();
             return false;
         }

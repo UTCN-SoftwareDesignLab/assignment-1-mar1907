@@ -23,4 +23,6 @@ public interface RightsRolesRepository {
     List<Role> findRolesForEmployee(Long id);
 
     void addRoleRight(Long roleId, Long rightId);
+
+    public void updateEmployeeRoles(Employee employee, List<Role> roles);
 }

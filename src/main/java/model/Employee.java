@@ -9,6 +9,15 @@ public class Employee {
     private String password;
     private List<Role> roles;
 
+    public Employee() {
+    }
+
+    public Employee(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

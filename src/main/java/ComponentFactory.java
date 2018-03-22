@@ -5,6 +5,8 @@ import repository.employee.EmployeeRepository;
 import repository.employee.EmployeeRepositoryMySQL;
 import service.employee.AuthenticationService;
 import service.employee.AuthenticationServiceMySQL;
+import service.options.OptionServiceImpl;
+import service.options.OptionsService;
 
 import java.sql.Connection;
 
@@ -12,6 +14,7 @@ import java.sql.Connection;
 public class ComponentFactory {
 
     private final AuthenticationService authenticationService;
+    private final OptionsService optionsService;
 
     private final EmployeeRepository userRepository;
     private final RightsRolesRepository rightsRolesRepository;
@@ -30,10 +33,15 @@ public class ComponentFactory {
         this.rightsRolesRepository = new RightsRolesRepositoryMySQL(connection);
         this.userRepository = new EmployeeRepositoryMySQL(connection, rightsRolesRepository);
         this.authenticationService = new AuthenticationServiceMySQL(this.userRepository, this.rightsRolesRepository);
+        this.optionsService = new OptionServiceImpl(this.rightsRolesRepository);
     }
 
     public AuthenticationService getAuthenticationService() {
         return authenticationService;
+    }
+
+    public OptionsService getOptionsService() {
+        return optionsService;
     }
 
     public EmployeeRepository getUserRepository() {

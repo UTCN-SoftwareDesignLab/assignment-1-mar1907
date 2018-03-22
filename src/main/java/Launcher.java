@@ -5,7 +5,7 @@ public class Launcher {
 
     public static void main(String[] args) {
         ComponentFactory componentFactory = ComponentFactory.instance();
-        new LoginController(new LoginView(), componentFactory.getAuthenticationService());
+        new LoginController(new LoginView(), componentFactory.getAuthenticationService(), componentFactory.getOptionsService());
     }
 
 }

@@ -4,7 +4,9 @@ import model.Employee;
 import model.validation.Notification;
 import repository.employee.AuthenticationException;
 import service.employee.AuthenticationService;
+import service.options.OptionsService;
 import view.LoginView;
+import view.OptionsView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,10 +16,12 @@ import java.awt.event.ActionListener;
 public class LoginController {
     private final LoginView loginView;
     private final AuthenticationService authenticationService;
+    private final OptionsService optionsService;
 
-    public LoginController(LoginView loginView, AuthenticationService authenticationService) {
+    public LoginController(LoginView loginView, AuthenticationService authenticationService, OptionsService optionsService) {
         this.loginView = loginView;
         this.authenticationService = authenticationService;
+        this.optionsService = optionsService;
         loginView.setLoginButtonListener(new LoginButtonListener());
         loginView.setRegisterButtonListener(new RegisterButtonListener());
     }
@@ -40,7 +44,9 @@ public class LoginController {
                 if (loginNotification.hasErrors()) {
                     JOptionPane.showMessageDialog(loginView.getContentPane(), loginNotification.getFormattedErrors());
                 } else {
-                    JOptionPane.showMessageDialog(loginView.getContentPane(), "Login successful!");
+                    //JOptionPane.showMessageDialog(loginView.getContentPane(), "Login successful!");
+                    OptionsView ov = new OptionsView(optionsService.getOptions(loginNotification.getResult()));
+                    new OptionsController(ov);
                 }
             }
         }

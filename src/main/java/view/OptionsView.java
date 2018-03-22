@@ -2,12 +2,14 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OptionsView extends JFrame{
 
     private List<Boolean> options;
+    private List<JButton> buttons;
     private JPanel contentPane;
 
 
@@ -20,7 +22,7 @@ public class OptionsView extends JFrame{
         setContentPane(contentPane);
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-        List<JButton> buttons = new ArrayList<>();
+        buttons = new ArrayList<>();
         buttons.add(new JButton("Manage Clients"));
         buttons.add(new JButton("Manage Accounts"));
         buttons.add(new JButton("Transfer Money"));
@@ -35,5 +37,29 @@ public class OptionsView extends JFrame{
 
         setVisible(true);
 
+    }
+
+    public void setManageClientsButtonListener(ActionListener al){
+        buttons.get(0).addActionListener(al);
+    }
+
+    public void setManageAccountsButtonListener(ActionListener al){
+        buttons.get(1).addActionListener(al);
+    }
+
+    public void setTransferMoneyButtonListener(ActionListener al){
+        buttons.get(2).addActionListener(al);
+    }
+
+    public void setPayBillButtonListener(ActionListener al){
+        buttons.get(3).addActionListener(al);
+    }
+
+    public void setManageEmployeesButtonListener(ActionListener al){
+        buttons.get(4).addActionListener(al);
+    }
+
+    public void setGenerateActivityReportButtonListener(ActionListener al){
+        buttons.get(5).addActionListener(al);
     }
 }

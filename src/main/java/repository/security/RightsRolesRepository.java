@@ -18,11 +18,15 @@ public interface RightsRolesRepository {
 
     Right findRightByTitle(String right);
 
+    Right findRightById(Long rightId);
+
     void addRolesToEmployee(Employee employee, List<Role> roles);
 
     List<Role> findRolesForEmployee(Long id);
 
     void addRoleRight(Long roleId, Long rightId);
 
-    public void updateEmployeeRoles(Employee employee, List<Role> roles);
+    void updateEmployeeRoles(Employee employee, List<Role> roles);
+
+    List<Right> findRightsForRole(Long roleID);
 }

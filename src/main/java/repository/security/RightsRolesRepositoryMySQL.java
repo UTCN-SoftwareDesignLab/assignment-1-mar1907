@@ -95,6 +95,23 @@ public class RightsRolesRepositoryMySQL implements RightsRolesRepository {
     }
 
     @Override
+    public Right findRightById(Long rightId) {
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            String fetchRightSql = "Select * from " + RIGHT + " where `id`=\'" + rightId + "\'";
+            ResultSet roleResultSet = statement.executeQuery(fetchRightSql);
+            roleResultSet.next();
+            String rightTitle = roleResultSet.getString("role");
+            return new Right(rightId, rightTitle);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
     public void addRolesToEmployee(Employee employee, List<Role> roles) {
         try {
             for (Role role : roles) {
@@ -151,5 +168,26 @@ public class RightsRolesRepositoryMySQL implements RightsRolesRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Right> findRightsForRole(Long roleID) {
+        List<Right> rights = new ArrayList<>();
+        try{
+            PreparedStatement statement = connection
+                    .prepareStatement("SELECT * FROM " + ROLE_RIGHT + " WHERE role_id=?");
+            statement.setLong(1, roleID);
+            ResultSet rightsResultSet = statement.executeQuery();
+            while(rightsResultSet.next()){
+                long rightId = rightsResultSet.getLong("right_id");
+                rights.add(findRightById(rightId));
+            }
+
+            return rights;
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -11,7 +11,7 @@ import service.options.OptionsService;
 import java.sql.Connection;
 
 
-public class ComponentFactory {
+public class ServiceFactory {
 
     private final AuthenticationService authenticationService;
     private final OptionsService optionsService;
@@ -19,16 +19,16 @@ public class ComponentFactory {
     private final EmployeeRepository userRepository;
     private final RightsRolesRepository rightsRolesRepository;
 
-    private static ComponentFactory instance;
+    private static ServiceFactory instance;
 
-    public static ComponentFactory instance() {
+    public static ServiceFactory instance() {
         if (instance == null) {
-            instance = new ComponentFactory();
+            instance = new ServiceFactory();
         }
         return instance;
     }
 
-    private ComponentFactory() {
+    private ServiceFactory() {
         Connection connection = new DBConnectionFactory().getConnectionWrapper(true).getConnection();
         this.rightsRolesRepository = new RightsRolesRepositoryMySQL(connection);
         this.userRepository = new EmployeeRepositoryMySQL(connection, rightsRolesRepository);

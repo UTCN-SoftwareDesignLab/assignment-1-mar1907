@@ -32,9 +32,9 @@ public class OptionServiceImpl implements OptionsService{
         }
         for(int i = 0; i < allRights.size(); i++){
             if(actualRights.contains(allRights.get(i))){
-                options.set(i, true);
+                options.add(true);
             } else {
-                options.set(i, false);
+                options.add(false);
             }
         }
 

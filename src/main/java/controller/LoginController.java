@@ -3,28 +3,51 @@ package controller;
 import model.Employee;
 import model.validation.Notification;
 import repository.employee.AuthenticationException;
+import service.Service;
 import service.employee.AuthenticationService;
 import service.options.OptionsService;
 import view.LoginView;
 import view.OptionsView;
+import view.View;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 
-public class LoginController {
-    private final LoginView loginView;
-    private final AuthenticationService authenticationService;
-    private final OptionsService optionsService;
+public class LoginController extends Controller{
+    private LoginView loginView;
+    private AuthenticationService authenticationService;
+    private OptionsService optionsService;
+    private OptionsController optionsController;
 
-    public LoginController(LoginView loginView, AuthenticationService authenticationService, OptionsService optionsService) {
+    public LoginController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
+        super(controllerMap, viewMap, serviceMap);
+        try{
+            this.loginView = (LoginView) viewMap.get("loginView");
+            this.optionsService = (OptionsService) serviceMap.get("optionsService");
+            this.authenticationService = (AuthenticationService) serviceMap.get("authenticationService");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        loginView.setLoginButtonListener(new LoginButtonListener());
+        loginView.setRegisterButtonListener(new RegisterButtonListener());
+    }
+
+    @Override
+    public void display() {
+        loginView.setVisible(true);
+    }
+
+    /*public LoginController(LoginView loginView, AuthenticationService authenticationService, OptionsService optionsService) {
         this.loginView = loginView;
         this.authenticationService = authenticationService;
         this.optionsService = optionsService;
         loginView.setLoginButtonListener(new LoginButtonListener());
         loginView.setRegisterButtonListener(new RegisterButtonListener());
-    }
+    }*/
 
     private class LoginButtonListener implements ActionListener {
 
@@ -45,8 +68,9 @@ public class LoginController {
                     JOptionPane.showMessageDialog(loginView.getContentPane(), loginNotification.getFormattedErrors());
                 } else {
                     //JOptionPane.showMessageDialog(loginView.getContentPane(), "Login successful!");
-                    OptionsView ov = new OptionsView(optionsService.getOptions(loginNotification.getResult()));
-                    new OptionsController(ov);
+                    loginView.dispose();
+                    optionsController.setButtonDisplayList(optionsService.getOptions(loginNotification.getResult()));
+                    optionsController.display();
                 }
             }
         }

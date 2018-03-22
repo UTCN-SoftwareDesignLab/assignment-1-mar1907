@@ -2,10 +2,11 @@ package service.client;
 
 import model.Client;
 import model.validation.Notification;
+import service.Service;
 
 import java.util.List;
 
-public interface ClientService {
+public interface ClientService extends Service{
 
     List<Client> getClients();
 

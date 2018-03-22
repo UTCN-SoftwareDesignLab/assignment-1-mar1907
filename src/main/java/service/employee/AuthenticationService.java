@@ -3,8 +3,9 @@ package service.employee;
 import model.Employee;
 import model.validation.Notification;
 import repository.employee.AuthenticationException;
+import service.Service;
 
-public interface AuthenticationService {
+public interface AuthenticationService extends Service{
 
     Notification<Boolean> register(String username, String password);
 

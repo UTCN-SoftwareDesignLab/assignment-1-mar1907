@@ -6,22 +6,23 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OptionsView extends JFrame{
+public class OptionsView extends View{
 
-    private List<Boolean> options;
+    //private List<Boolean> options;
     private List<JButton> buttons;
     private JPanel contentPane;
 
 
-    public OptionsView(List<Boolean> options) {
-        this.options = options;
+    public OptionsView() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 241, 213);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+    }
 
+    public void setButtons(List<Boolean> options){
         buttons = new ArrayList<>();
         buttons.add(new JButton("Manage Clients"));
         buttons.add(new JButton("Manage Accounts"));
@@ -34,9 +35,6 @@ public class OptionsView extends JFrame{
             if (options.get(i))
                 contentPane.add(buttons.get(i));
         }
-
-        setVisible(true);
-
     }
 
     public void setManageClientsButtonListener(ActionListener al){

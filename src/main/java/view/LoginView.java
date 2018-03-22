@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import static javax.swing.BoxLayout.Y_AXIS;
 
-public class LoginView extends JFrame {
+public class LoginView extends View {
 
     private JTextField tfUsername;
     private JTextField tfPassword;

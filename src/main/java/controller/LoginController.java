@@ -28,6 +28,7 @@ public class LoginController extends Controller{
             this.loginView = (LoginView) viewMap.get("loginView");
             this.optionsService = (OptionsService) serviceMap.get("optionsService");
             this.authenticationService = (AuthenticationService) serviceMap.get("authenticationService");
+            this.optionsController = (OptionsController) controllerMap.get("optionsController");
         } catch (Exception e){
             e.printStackTrace();
         }

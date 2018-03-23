@@ -1,3 +1,5 @@
+package factory;
+
 import database.DBConnectionFactory;
 import repository.security.RightsRolesRepository;
 import repository.security.RightsRolesRepositoryMySQL;

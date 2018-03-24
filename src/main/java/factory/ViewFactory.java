@@ -1,7 +1,6 @@
 package factory;
 
-import view.LoginView;
-import view.OptionsView;
+import view.*;
 
 public class ViewFactory {
 
@@ -9,6 +8,9 @@ public class ViewFactory {
 
     private LoginView loginView;
     private OptionsView optionsView;
+    private ManageClientsView manageClientsView;
+    private ManageAccountsView manageAccountsView;
+    private PayBillView payBillView;
 
     public static ViewFactory instance(){
         if(instance==null){
@@ -21,6 +23,9 @@ public class ViewFactory {
     private ViewFactory(){
         loginView = new LoginView();
         optionsView = new OptionsView();
+        manageClientsView = new ManageClientsView();
+        manageAccountsView = new ManageAccountsView();
+        payBillView = new PayBillView();
     }
 
     public LoginView getLoginView() {
@@ -29,5 +34,17 @@ public class ViewFactory {
 
     public OptionsView getOptionsView() {
         return optionsView;
+    }
+
+    public ManageClientsView getManageClientsView() {
+        return manageClientsView;
+    }
+
+    public ManageAccountsView getManageAccountsView() {
+        return manageAccountsView;
+    }
+
+    public PayBillView getPayBillView() {
+        return payBillView;
     }
 }

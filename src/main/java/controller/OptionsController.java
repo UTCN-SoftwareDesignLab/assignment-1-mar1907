@@ -2,6 +2,7 @@ package controller;
 
 import service.Service;
 import view.OptionsView;
+import view.PayBillView;
 import view.View;
 
 import java.awt.event.ActionEvent;
@@ -12,21 +13,20 @@ import java.util.Map;
 public class OptionsController extends Controller{
 
     private OptionsView optionsView;
+    private ManageClientsController manageClientsController;
+    private ManageAccountsController manageAccountsController;
+    private PayBillController payBillController;
 
     public OptionsController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
         try {
             this.optionsView = (OptionsView) viewMap.get("optionsView");
+            this.manageClientsController = (ManageClientsController) controllerMap.get("manageClientsController");
+            this.manageAccountsController = (ManageAccountsController) controllerMap.get("manageAccountsController");
+            this.payBillController = (PayBillController) controllerMap.get("payBillController");
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        optionsView.setManageClientsButtonListener(new ManageClientsButtonListener());
-        optionsView.setManageAccountsButtonListener(new ManageAccountsButtonListener());
-        optionsView.setTransferMoneyButtonListener(new TransferMoneyButtonListener());
-        optionsView.setPayBillButtonListener(new PayBillButtonListener());
-        optionsView.setManageEmployeesButtonListener(new ManageEmployeesButtonListener());
-        optionsView.setGenerateActivityReportButtonListener(new GenerateActivityReportButtonListener());
     }
 
     /*public OptionsController(OptionsView optionsView) {
@@ -46,13 +46,19 @@ public class OptionsController extends Controller{
 
     public void setButtonDisplayList(List<Boolean> bdl){
         optionsView.setButtons(bdl);
+        optionsView.setManageClientsButtonListener(new ManageClientsButtonListener());
+        optionsView.setManageAccountsButtonListener(new ManageAccountsButtonListener());
+        optionsView.setTransferMoneyButtonListener(new TransferMoneyButtonListener());
+        optionsView.setPayBillButtonListener(new PayBillButtonListener());
+        optionsView.setManageEmployeesButtonListener(new ManageEmployeesButtonListener());
+        optionsView.setGenerateActivityReportButtonListener(new GenerateActivityReportButtonListener());
     }
 
     private class ManageClientsButtonListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            manageClientsController.display();
         }
     }
 
@@ -60,7 +66,7 @@ public class OptionsController extends Controller{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            manageAccountsController.display();
         }
     }
 
@@ -76,7 +82,7 @@ public class OptionsController extends Controller{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            payBillController.display();
         }
     }
 

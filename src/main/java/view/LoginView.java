@@ -23,7 +23,6 @@ public class LoginView extends View {
         add(btnLogin);
         add(btnRegister);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
     }
 
     private void initializeFields() {

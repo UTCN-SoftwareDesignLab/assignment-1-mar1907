@@ -42,14 +42,6 @@ public class LoginController extends Controller{
         loginView.setVisible(true);
     }
 
-    /*public LoginController(LoginView loginView, AuthenticationService authenticationService, OptionsService optionsService) {
-        this.loginView = loginView;
-        this.authenticationService = authenticationService;
-        this.optionsService = optionsService;
-        loginView.setLoginButtonListener(new LoginButtonListener());
-        loginView.setRegisterButtonListener(new RegisterButtonListener());
-    }*/
-
     private class LoginButtonListener implements ActionListener {
 
         @Override

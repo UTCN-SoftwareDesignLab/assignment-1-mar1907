@@ -1,9 +1,5 @@
 package database;
 
-
-import model.Employee;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static database.Constants.Employees.ADMIN_USER;
@@ -57,6 +53,13 @@ public class Constants {
 
         public static final String[] RIGHTS = new String[]{MANAGE_CLIENT, MANAGE_ACCOUNT, TRANSFER, PROCESS_BILL,
                 CRUD_EMPLOYEE, GENERATE_REPORTS};
+    }
+
+    public static class Types{
+        public static final String SAVING = "Saving";
+        public static final String SPENDING = "Spending";
+
+        public static final List<String> TYPES = new ArrayList<>(Arrays.asList(SAVING, SPENDING));
     }
 
     public static class Employees {

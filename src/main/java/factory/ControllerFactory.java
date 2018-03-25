@@ -65,7 +65,7 @@ public class ControllerFactory {
         viewMap.put("manageClientsView", viewFactory.getManageClientsView());
 
         Map<String, Service> serviceMap = new HashMap<>();
-        //TODO add services
+        serviceMap.put("clientService", serviceFactory.getClientService());
 
         return new ManageClientsController(null, viewMap, serviceMap);
     }

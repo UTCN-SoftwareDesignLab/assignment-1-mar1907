@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ClientService extends Service{
 
-    List<Client> getClients();
+    String getClientsData();
 
     Notification<Client> getClient(Long clientId);
 

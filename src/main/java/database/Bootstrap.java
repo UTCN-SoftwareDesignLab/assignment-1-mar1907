@@ -2,6 +2,8 @@ package database;
 
 import model.Employee;
 import model.Role;
+import repository.account.AccountRepository;
+import repository.account.AccountRepositoryMySQL;
 import repository.employee.AuthenticationException;
 import repository.employee.EmployeeRepository;
 import repository.employee.EmployeeRepositoryMySQL;
@@ -23,12 +25,14 @@ import static database.Constants.Schemas.SCHEMAS;
 import static database.Constants.Tables.ORDERED_TABLES_FOR_DROPPING;
 import static database.Constants.getEmployeeRoles;
 import static database.Constants.getRolesRights;
+import static database.Constants.Types.TYPES;
 
 public class Bootstrap {
 
     private static RightsRolesRepository rightsRolesRepository;
     private static EmployeeRepository employeeRepository;
     private static AuthenticationService authenticationService;
+    private static AccountRepository accountRepository;
 
     public static void main(String[] args) throws SQLException{
         dropAll();
@@ -94,11 +98,13 @@ public class Bootstrap {
             rightsRolesRepository = new RightsRolesRepositoryMySQL(connectionWrapper.getConnection());
             employeeRepository = new EmployeeRepositoryMySQL(connectionWrapper.getConnection(), rightsRolesRepository);
             authenticationService = new AuthenticationServiceMySQL(employeeRepository, rightsRolesRepository);
+            accountRepository = new AccountRepositoryMySQL(connectionWrapper.getConnection());
 
             bootstrapRoles();
             bootstrapRights();
             bootstrapRoleRight();
             bootstrapUserRoles();
+            bootstrapAccountTypes();
         }
     }
 
@@ -146,14 +152,13 @@ public class Bootstrap {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            /*Long employeeId = e.getId();
 
-            for(String role : employeeRoles.get(e)){
-                Long roleId = rightsRolesRepository.findRoleByTitle(role).getId();
+        }
+    }
 
-                rightsRolesRepository.addEmployeeRole(employeeId, roleId);
-            }*/
-
+    private static void bootstrapAccountTypes(){
+        for(String type: TYPES){
+            accountRepository.addType(type);
         }
     }
 

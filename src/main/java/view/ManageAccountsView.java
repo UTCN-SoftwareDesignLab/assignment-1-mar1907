@@ -8,6 +8,9 @@ public class ManageAccountsView extends View {
     private JPanel contentPane;
     private JTextField textField;
     private JTextField textField_1;
+    private JTextField clientIdTf;
+    private JTextField interestTf;
+    private JTextArea dataArea;
     private JButton btnNew;
     private JButton btnUpdate;
     private JCheckBox chckbxSavingAccount;
@@ -21,12 +24,25 @@ public class ManageAccountsView extends View {
         setContentPane(contentPane);
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
+        JLabel lblData = new JLabel("data");
+        contentPane.add(lblData);
+
+        dataArea = new JTextArea();
+        contentPane.add(dataArea);
+
         JLabel lblId = new JLabel("id");
         contentPane.add(lblId);
 
         textField = new JTextField();
         contentPane.add(textField);
         textField.setColumns(10);
+
+        JLabel lblClientId = new JLabel("clientId");
+        contentPane.add(lblClientId);
+
+        clientIdTf = new JTextField();
+        contentPane.add(clientIdTf);
+        clientIdTf.setColumns(10);
 
         JLabel lblNewLabel = new JLabel("amount");
         contentPane.add(lblNewLabel);
@@ -37,6 +53,13 @@ public class ManageAccountsView extends View {
 
         chckbxSavingAccount = new JCheckBox("Saving account");
         contentPane.add(chckbxSavingAccount);
+
+        JLabel lblInterest = new JLabel("interest");
+        contentPane.add(lblInterest);
+
+        interestTf = new JTextField();
+        contentPane.add(interestTf);
+        interestTf.setColumns(10);
 
         JButton btnViewAll = new JButton("View all");
         contentPane.add(btnViewAll);

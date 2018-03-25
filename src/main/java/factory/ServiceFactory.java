@@ -1,10 +1,14 @@
 package factory;
 
 import database.DBConnectionFactory;
+import repository.client.ClientRepository;
+import repository.client.ClientRepositoryMySQL;
 import repository.security.RightsRolesRepository;
 import repository.security.RightsRolesRepositoryMySQL;
 import repository.employee.EmployeeRepository;
 import repository.employee.EmployeeRepositoryMySQL;
+import service.client.ClientService;
+import service.client.ClientServiceMySQL;
 import service.employee.AuthenticationService;
 import service.employee.AuthenticationServiceMySQL;
 import service.options.OptionServiceImpl;
@@ -17,9 +21,11 @@ public class ServiceFactory {
 
     private final AuthenticationService authenticationService;
     private final OptionsService optionsService;
+    private final ClientService clientService;
 
     private final EmployeeRepository userRepository;
     private final RightsRolesRepository rightsRolesRepository;
+    private final ClientRepository clientRepository;
 
     private static ServiceFactory instance;
 
@@ -36,6 +42,9 @@ public class ServiceFactory {
         this.userRepository = new EmployeeRepositoryMySQL(connection, rightsRolesRepository);
         this.authenticationService = new AuthenticationServiceMySQL(this.userRepository, this.rightsRolesRepository);
         this.optionsService = new OptionServiceImpl(this.rightsRolesRepository);
+
+        this.clientRepository = new ClientRepositoryMySQL(connection);
+        this.clientService = new ClientServiceMySQL(clientRepository);
     }
 
     public AuthenticationService getAuthenticationService() {
@@ -52,5 +61,9 @@ public class ServiceFactory {
 
     public RightsRolesRepository getRightsRolesRepository() {
         return rightsRolesRepository;
+    }
+
+    public ClientService getClientService() {
+        return clientService;
     }
 }

@@ -16,6 +16,9 @@ public class OptionsController extends Controller{
     private ManageClientsController manageClientsController;
     private ManageAccountsController manageAccountsController;
     private PayBillController payBillController;
+    private TransferController transferController;
+    private ManageEmployeesController manageEmployeesController;
+    private GenerateReportController generateReportController;
 
     public OptionsController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
@@ -24,6 +27,9 @@ public class OptionsController extends Controller{
             this.manageClientsController = (ManageClientsController) controllerMap.get("manageClientsController");
             this.manageAccountsController = (ManageAccountsController) controllerMap.get("manageAccountsController");
             this.payBillController = (PayBillController) controllerMap.get("payBillController");
+            this.transferController = (TransferController) controllerMap.get("transferController");
+            this.manageEmployeesController = (ManageEmployeesController) controllerMap.get("manageEmployeesController");
+            this.generateReportController = (GenerateReportController) controllerMap.get("generateReportController");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,7 +80,7 @@ public class OptionsController extends Controller{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            transferController.display();
         }
     }
 
@@ -90,7 +96,7 @@ public class OptionsController extends Controller{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            manageEmployeesController.display();
         }
     }
 
@@ -98,7 +104,7 @@ public class OptionsController extends Controller{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            generateReportController.display();
         }
     }
 }

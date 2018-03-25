@@ -23,7 +23,7 @@ public class OptionServiceImpl implements OptionsService{
     @Override
     public List<Boolean> getOptions(Employee employee) {
         List<String> allRights = new ArrayList<>(Arrays.asList(RIGHTS));
-        List<Boolean> options = new ArrayList<Boolean>(allRights.size());
+        List<Boolean> options = new ArrayList<>(allRights.size());
 
         List<String> actualRights = new ArrayList<>();
         for(Role r: employee.getRoles()){

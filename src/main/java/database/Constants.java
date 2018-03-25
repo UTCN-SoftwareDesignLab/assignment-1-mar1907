@@ -81,7 +81,7 @@ public class Constants {
         for (String role : ROLES) {
             ROLES_RIGHTS.put(role, new ArrayList<>());
         }
-        ROLES_RIGHTS.get(ADMINISTRATOR).addAll(Arrays.asList(RIGHTS));
+        ROLES_RIGHTS.get(ADMINISTRATOR).addAll(Arrays.asList(CRUD_EMPLOYEE, GENERATE_REPORTS));
 
         ROLES_RIGHTS.get(EMPLOYEE).addAll(Arrays.asList(MANAGE_CLIENT, MANAGE_ACCOUNT, TRANSFER, PROCESS_BILL));
 

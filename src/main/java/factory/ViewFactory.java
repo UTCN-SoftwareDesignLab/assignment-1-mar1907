@@ -11,6 +11,9 @@ public class ViewFactory {
     private ManageClientsView manageClientsView;
     private ManageAccountsView manageAccountsView;
     private PayBillView payBillView;
+    private TransferView transferView;
+    private ManageEmployeesView manageEmployeesView;
+    private GenerateReportView generateReportView;
 
     public static ViewFactory instance(){
         if(instance==null){
@@ -26,6 +29,9 @@ public class ViewFactory {
         manageClientsView = new ManageClientsView();
         manageAccountsView = new ManageAccountsView();
         payBillView = new PayBillView();
+        transferView = new TransferView();
+        manageEmployeesView = new ManageEmployeesView();
+        generateReportView = new GenerateReportView();
     }
 
     public LoginView getLoginView() {
@@ -46,5 +52,17 @@ public class ViewFactory {
 
     public PayBillView getPayBillView() {
         return payBillView;
+    }
+
+    public TransferView getTransferView() {
+        return transferView;
+    }
+
+    public ManageEmployeesView getManageEmployeesView() {
+        return manageEmployeesView;
+    }
+
+    public GenerateReportView getGenerateReportView() {
+        return generateReportView;
     }
 }

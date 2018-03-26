@@ -5,9 +5,9 @@ import model.SavingsAccount;
 
 public class SavingsAccountBuilder extends AccountBuilder {
 
-    /*public SavingsAccountBuilder() {
-        super(account);
-    }*/
+    public SavingsAccountBuilder() {
+        account = new SavingsAccount();
+    }
 
     public SavingsAccountBuilder setInterest(double interest){
         ((SavingsAccount)account).setInterest(interest);

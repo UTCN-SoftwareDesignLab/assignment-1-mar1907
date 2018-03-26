@@ -10,4 +10,9 @@ public class SavingsAccount extends Account {
     public void setInterest(double interest) {
         this.interest = interest;
     }
+
+    @Override
+    public String toString() {
+        return getId() + " " + getAmount() + " " + interest;
+    }
 }

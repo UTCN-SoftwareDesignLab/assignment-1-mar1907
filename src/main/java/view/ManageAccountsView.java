@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
 
 public class ManageAccountsView extends View {
 
@@ -13,6 +14,7 @@ public class ManageAccountsView extends View {
     private JTextArea dataArea;
     private JButton btnNew;
     private JButton btnUpdate;
+    private JButton btnViewAll;
     private JCheckBox chckbxSavingAccount;
     private JButton btnDelete;
 
@@ -61,7 +63,7 @@ public class ManageAccountsView extends View {
         contentPane.add(interestTf);
         interestTf.setColumns(10);
 
-        JButton btnViewAll = new JButton("View all");
+        btnViewAll = new JButton("View all");
         contentPane.add(btnViewAll);
 
         btnNew = new JButton("New");
@@ -72,5 +74,45 @@ public class ManageAccountsView extends View {
 
         btnDelete = new JButton("Delete");
         contentPane.add(btnDelete);
+    }
+
+    public void addViewAllActionListener(ActionListener al){
+        btnViewAll.addActionListener(al);
+    }
+
+    public void sendText(String text){
+        dataArea.setText(text);
+    }
+
+    public void addNewActionListener(ActionListener al){
+        btnNew.addActionListener(al);
+    }
+
+    public String getAAmount(){
+        return textField_1.getText();
+    }
+
+    public String getClientId(){
+        return clientIdTf.getText();
+    }
+
+    public boolean isSaving(){
+        return chckbxSavingAccount.isSelected();
+    }
+
+    public String getInterest(){
+        return interestTf.getText();
+    }
+
+    public void addUpdateActionListener(ActionListener al){
+        btnUpdate.addActionListener(al);
+    }
+
+    public String getAId(){
+        return textField.getText();
+    }
+
+    public void addDeleteActionListener(ActionListener al){
+        btnDelete.addActionListener(al);
     }
 }

@@ -1,12 +1,16 @@
 package factory;
 
 import database.DBConnectionFactory;
+import repository.account.AccountRepository;
+import repository.account.AccountRepositoryMySQL;
 import repository.client.ClientRepository;
 import repository.client.ClientRepositoryMySQL;
 import repository.security.RightsRolesRepository;
 import repository.security.RightsRolesRepositoryMySQL;
 import repository.employee.EmployeeRepository;
 import repository.employee.EmployeeRepositoryMySQL;
+import service.account.AccountService;
+import service.account.AccountServiceMySQL;
 import service.client.ClientService;
 import service.client.ClientServiceMySQL;
 import service.employee.AuthenticationService;
@@ -22,10 +26,12 @@ public class ServiceFactory {
     private final AuthenticationService authenticationService;
     private final OptionsService optionsService;
     private final ClientService clientService;
+    private final AccountService accountService;
 
     private final EmployeeRepository userRepository;
     private final RightsRolesRepository rightsRolesRepository;
     private final ClientRepository clientRepository;
+    private final AccountRepository accountRepository;
 
     private static ServiceFactory instance;
 
@@ -45,6 +51,9 @@ public class ServiceFactory {
 
         this.clientRepository = new ClientRepositoryMySQL(connection);
         this.clientService = new ClientServiceMySQL(clientRepository);
+
+        this.accountRepository = new AccountRepositoryMySQL(connection);
+        this.accountService = new AccountServiceMySQL(accountRepository);
     }
 
     public AuthenticationService getAuthenticationService() {
@@ -65,5 +74,9 @@ public class ServiceFactory {
 
     public ClientService getClientService() {
         return clientService;
+    }
+
+    public AccountService getAccountService() {
+        return accountService;
     }
 }

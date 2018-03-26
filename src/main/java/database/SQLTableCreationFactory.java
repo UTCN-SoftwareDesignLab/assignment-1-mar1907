@@ -27,6 +27,7 @@ public class SQLTableCreationFactory {
                 return  "  CREATE TABLE IF NOT EXISTS account (" +
                         "  id INT NOT NULL AUTO_INCREMENT," +
                         "  amount INT NOT NULL," +
+                        "  interest FLOAT," +
                         "  PRIMARY KEY (id)," +
                         "  client_id INT NOT NULL," +
                         "  type_id INT NOT NULL," +

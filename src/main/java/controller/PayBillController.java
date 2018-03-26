@@ -14,6 +14,10 @@ import java.util.Map;
 
 public class PayBillController extends Controller {
 
+    private static final String PAY_BILL_VIEW = "payBillView";
+    private static final String BILL_SERVICE = "billService";
+    private static final String LOG_SERVICE = "logService";
+
     private PayBillView payBillView;
     private BillService billService;
     private LogService logService;
@@ -22,9 +26,9 @@ public class PayBillController extends Controller {
         super(controllerMap, viewMap, serviceMap);
 
         try{
-            payBillView = (PayBillView) viewMap.get("payBillView");
-            billService = (BillService) serviceMap.get("billService");
-            logService = (LogService) serviceMap.get("logService");
+            payBillView = (PayBillView) viewMap.get(PAY_BILL_VIEW);
+            billService = (BillService) serviceMap.get(BILL_SERVICE);
+            logService = (LogService) serviceMap.get(LOG_SERVICE);
         } catch (Exception e){
             e.printStackTrace();
         }

@@ -14,6 +14,10 @@ import java.util.Map;
 
 public class TransferController extends Controller {
 
+    private static final String TRANSFER_VIEW = "transferView";
+    private static final String TRANSFER_SERVICE = "transferService";
+    private static final String LOG_SERVICE = "logService";
+
     private TransferView transferView;
     private TransferService transferService;
     private LogService logService;
@@ -22,9 +26,9 @@ public class TransferController extends Controller {
         super(controllerMap, viewMap, serviceMap);
 
         try{
-            this.transferView = (TransferView) viewMap.get("transferView");
-            this.transferService = (TransferService) serviceMap.get("transferService");
-            this.logService = (LogService) serviceMap.get("logService");
+            this.transferView = (TransferView) viewMap.get(TRANSFER_VIEW);
+            this.transferService = (TransferService) serviceMap.get(TRANSFER_SERVICE);
+            this.logService = (LogService) serviceMap.get(LOG_SERVICE);
         } catch (Exception e){
             e.printStackTrace();
         }

@@ -14,6 +14,10 @@ import java.util.Map;
 
 public class ManageEmployeesController  extends Controller{
 
+    private static final String MANAGE_EMPLOYEES_VIEW = "manageEmployeesView";
+    private static final String EMPLOYEE_SERVICE = "employeeService";
+    private static final String LOG_SERVICE = "logService";
+
     private ManageEmployeesView manageEmployeesView;
     private EmployeeService employeeService;
     private LogService logService;
@@ -21,9 +25,9 @@ public class ManageEmployeesController  extends Controller{
     public ManageEmployeesController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
         try {
-            manageEmployeesView = (ManageEmployeesView) viewMap.get("manageEmployeesView");
-            employeeService = (EmployeeService) serviceMap.get("employeeService");
-            logService = (LogService) serviceMap.get("logService");
+            manageEmployeesView = (ManageEmployeesView) viewMap.get(MANAGE_EMPLOYEES_VIEW);
+            employeeService = (EmployeeService) serviceMap.get(EMPLOYEE_SERVICE);
+            logService = (LogService) serviceMap.get(LOG_SERVICE);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -73,7 +77,7 @@ public class ManageEmployeesController  extends Controller{
     private class UpdateActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            long id = 0;
+            long id;
             try{
                 id = Long.parseLong(manageEmployeesView.getID());
             } catch (NumberFormatException ex){
@@ -101,7 +105,7 @@ public class ManageEmployeesController  extends Controller{
     private class DeleteActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            long id = 0;
+            long id;
             try{
                 id = Long.parseLong(manageEmployeesView.getID());
             } catch (NumberFormatException ex){

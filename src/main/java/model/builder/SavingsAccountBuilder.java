@@ -1,6 +1,5 @@
 package model.builder;
 
-import model.Account;
 import model.SavingsAccount;
 
 public class SavingsAccountBuilder extends AccountBuilder {

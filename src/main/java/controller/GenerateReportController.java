@@ -13,6 +13,9 @@ import java.util.Map;
 
 public class GenerateReportController extends Controller {
 
+    private static final String GENERATE_REPORT_VIEW = "generateReportView";
+    private static final String LOG_SERVICE = "logService";
+
     private GenerateReportView generateReportView;
     private LogService logService;
 
@@ -20,8 +23,8 @@ public class GenerateReportController extends Controller {
         super(controllerMap, viewMap, serviceMap);
 
         try{
-            generateReportView = (GenerateReportView) viewMap.get("generateReportView");
-            logService = (LogService) serviceMap.get("logService");
+            generateReportView = (GenerateReportView) viewMap.get(GENERATE_REPORT_VIEW);
+            logService = (LogService) serviceMap.get(LOG_SERVICE);
         } catch (Exception e){
             e.printStackTrace();
         }

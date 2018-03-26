@@ -92,14 +92,6 @@ public class ServiceFactory {
         return optionsService;
     }
 
-    public EmployeeRepository getUserRepository() {
-        return userRepository;
-    }
-
-    public RightsRolesRepository getRightsRolesRepository() {
-        return rightsRolesRepository;
-    }
-
     public ClientService getClientService() {
         return clientService;
     }

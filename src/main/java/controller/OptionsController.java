@@ -2,7 +2,6 @@ package controller;
 
 import service.Service;
 import view.OptionsView;
-import view.PayBillView;
 import view.View;
 
 import java.awt.event.ActionEvent;
@@ -11,6 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 public class OptionsController extends Controller{
+
+    private static final String OPTIONS_VIEW = "optionsView";
+    private static final String MANAGE_CLIENTS_CONTROLLER = "manageClientsController";
+    private static final String MANAGE_ACCOUNTS_CONTROLLER = "manageAccountsController";
+    private static final String PAY_BILL_CONTROLLER = "payBillController";
+    private static final String TRANSFER_CONTROLLER = "transferController";
+    private static final String MANAGE_EMPLOYEES_CONTROLLER = "manageEmployeesController";
+    private static final String GENERATE_REPORT_CONTROLLER = "generateReportController";
 
     private OptionsView optionsView;
     private ManageClientsController manageClientsController;
@@ -23,13 +30,13 @@ public class OptionsController extends Controller{
     public OptionsController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
         try {
-            this.optionsView = (OptionsView) viewMap.get("optionsView");
-            this.manageClientsController = (ManageClientsController) controllerMap.get("manageClientsController");
-            this.manageAccountsController = (ManageAccountsController) controllerMap.get("manageAccountsController");
-            this.payBillController = (PayBillController) controllerMap.get("payBillController");
-            this.transferController = (TransferController) controllerMap.get("transferController");
-            this.manageEmployeesController = (ManageEmployeesController) controllerMap.get("manageEmployeesController");
-            this.generateReportController = (GenerateReportController) controllerMap.get("generateReportController");
+            this.optionsView = (OptionsView) viewMap.get(OPTIONS_VIEW);
+            this.manageClientsController = (ManageClientsController) controllerMap.get(MANAGE_CLIENTS_CONTROLLER);
+            this.manageAccountsController = (ManageAccountsController) controllerMap.get(MANAGE_ACCOUNTS_CONTROLLER);
+            this.payBillController = (PayBillController) controllerMap.get(PAY_BILL_CONTROLLER);
+            this.transferController = (TransferController) controllerMap.get(TRANSFER_CONTROLLER);
+            this.manageEmployeesController = (ManageEmployeesController) controllerMap.get(MANAGE_EMPLOYEES_CONTROLLER);
+            this.generateReportController = (GenerateReportController) controllerMap.get(GENERATE_REPORT_CONTROLLER);
         } catch (Exception e) {
             e.printStackTrace();
         }

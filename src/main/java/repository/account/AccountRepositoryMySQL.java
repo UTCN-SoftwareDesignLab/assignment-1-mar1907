@@ -38,7 +38,7 @@ public class AccountRepositoryMySQL implements AccountRepository {
                 Long accountTypeId = resultSet.getLong("type_id");
                 if(isSavingsAccount(accountTypeId)){
                     SavingsAccount account = (SavingsAccount) new SavingsAccountBuilder()
-                            .setInterest(resultSet.getInt("interest"))
+                            .setInterest(resultSet.getFloat("interest"))
                             .setID(resultSet.getLong("id"))
                             .setAmount(resultSet.getInt("amount"))
                             .build();

@@ -14,6 +14,10 @@ import java.util.Map;
 
 public class ManageAccountsController extends Controller {
 
+    private static final String MANAGE_ACCOUNTS_VIEW = "manageAccountsView";
+    private static final String ACCOUNT_SERVICE = "accountService";
+    private static final String LOG_SERVICE = "logService";
+
     private ManageAccountsView manageAccountsView;
     private AccountService accountService;
     private LogService logService;
@@ -22,9 +26,9 @@ public class ManageAccountsController extends Controller {
         super(controllerMap, viewMap, serviceMap);
 
         try{
-            manageAccountsView = (ManageAccountsView) viewMap.get("manageAccountsView");
-            accountService = (AccountService) serviceMap.get("accountService");
-            logService = (LogService) serviceMap.get("logService");
+            manageAccountsView = (ManageAccountsView) viewMap.get(MANAGE_ACCOUNTS_VIEW);
+            accountService = (AccountService) serviceMap.get(ACCOUNT_SERVICE);
+            logService = (LogService) serviceMap.get(LOG_SERVICE);
         } catch (Exception e){
             e.printStackTrace();
         }

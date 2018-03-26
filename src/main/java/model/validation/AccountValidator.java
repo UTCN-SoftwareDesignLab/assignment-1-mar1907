@@ -1,14 +1,13 @@
 package model.validation;
 
 import model.Account;
-import model.Client;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AccountValidator {
 
-    private final Account account;
+    protected final Account account;
     protected final List<String> errors;
 
     public AccountValidator(Account account) {

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface OptionsService extends Service {
 
-    public List<Boolean> getOptions(Employee employee);
+    List<Boolean> getOptions(Employee employee);
 }

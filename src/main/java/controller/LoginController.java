@@ -8,7 +8,6 @@ import service.employee.AuthenticationService;
 import service.log.LogService;
 import service.options.OptionsService;
 import view.LoginView;
-import view.OptionsView;
 import view.View;
 
 import javax.swing.*;
@@ -18,6 +17,12 @@ import java.util.Map;
 
 
 public class LoginController extends Controller{
+    private static final String LOGIN_VIEW = "loginView";
+    private static final String OPTIONS_SERVICE = "optionsService";
+    private static final String AUTHENTICATION_SERVICE = "authenticationService";
+    private static final String OPTIONS_CONTROLLER = "optionsController";
+    private static final String LOG_SERVICE = "logService";
+
     private LoginView loginView;
     private AuthenticationService authenticationService;
     private OptionsService optionsService;
@@ -27,11 +32,11 @@ public class LoginController extends Controller{
     public LoginController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
         try{
-            this.loginView = (LoginView) viewMap.get("loginView");
-            this.optionsService = (OptionsService) serviceMap.get("optionsService");
-            this.authenticationService = (AuthenticationService) serviceMap.get("authenticationService");
-            this.optionsController = (OptionsController) controllerMap.get("optionsController");
-            this.logService = (LogService) serviceMap.get("logService");
+            this.loginView = (LoginView) viewMap.get(LOGIN_VIEW);
+            this.optionsService = (OptionsService) serviceMap.get(OPTIONS_SERVICE);
+            this.authenticationService = (AuthenticationService) serviceMap.get(AUTHENTICATION_SERVICE);
+            this.optionsController = (OptionsController) controllerMap.get(OPTIONS_CONTROLLER);
+            this.logService = (LogService) serviceMap.get(LOG_SERVICE);
         } catch (Exception e){
             e.printStackTrace();
         }

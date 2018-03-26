@@ -10,10 +10,13 @@ import view.View;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.Map;
 
 public class ManageClientsController extends Controller {
+
+    private static final String MANAGE_CLIENTS_VIEW = "manageClientsView";
+    private static final String CLIENT_SERVICE = "clientService";
+    private static final String LOG_SERVICE = "logService";
 
     private ManageClientsView manageClientsView;
     private ClientService clientService;
@@ -23,9 +26,9 @@ public class ManageClientsController extends Controller {
         super(controllerMap, viewMap, serviceMap);
 
         try {
-            this.manageClientsView = (ManageClientsView) viewMap.get("manageClientsView");
-            this.clientService = (ClientService) serviceMap.get("clientService");
-            this.logService = (LogService) serviceMap.get("logService");
+            this.manageClientsView = (ManageClientsView) viewMap.get(MANAGE_CLIENTS_VIEW);
+            this.clientService = (ClientService) serviceMap.get(CLIENT_SERVICE);
+            this.logService = (LogService) serviceMap.get(LOG_SERVICE);
         } catch (Exception e){
             e.printStackTrace();
         }

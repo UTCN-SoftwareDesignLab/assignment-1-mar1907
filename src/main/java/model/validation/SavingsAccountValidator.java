@@ -1,6 +1,5 @@
 package model.validation;
 
-import model.Account;
 import model.SavingsAccount;
 
 public class SavingsAccountValidator extends AccountValidator {
@@ -11,6 +10,7 @@ public class SavingsAccountValidator extends AccountValidator {
 
     @Override
     public boolean validate() {
+        validateInterest(((SavingsAccount)account).getInterest());
         return super.validate();
     }
 

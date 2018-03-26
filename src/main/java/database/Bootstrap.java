@@ -4,7 +4,6 @@ import model.Employee;
 import model.Role;
 import repository.account.AccountRepository;
 import repository.account.AccountRepositoryMySQL;
-import repository.employee.AuthenticationException;
 import repository.employee.EmployeeRepository;
 import repository.employee.EmployeeRepositoryMySQL;
 import repository.security.RightsRolesRepository;

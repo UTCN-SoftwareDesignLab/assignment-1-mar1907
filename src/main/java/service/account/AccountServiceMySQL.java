@@ -1,13 +1,10 @@
 package service.account;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import model.Account;
-import model.SavingsAccount;
 import model.builder.AccountBuilder;
 import model.builder.SavingsAccountBuilder;
 import model.validation.AccountValidator;
 import model.validation.Notification;
-import model.validation.SavingsAccountValidator;
 import repository.account.AccountRepository;
 
 import java.util.List;
@@ -65,15 +62,17 @@ public class AccountServiceMySQL implements AccountService {
     private Account formAccount(long id, int amount, boolean saving, double interest) {
         return saving ? new SavingsAccountBuilder()
                 .setInterest(interest)
+                .setID(id)
                 .setAmount(amount)
                 .build() : new AccountBuilder()
+                .setID(id)
                 .setAmount(amount)
                 .build();
     }
 
     @Override
     public Notification<Boolean> updateAccount(long id, int amount, long clientID, boolean saving, double interest) {
-        Account acc = formAccount(amount, saving, interest);
+        Account acc = formAccount(id, amount, saving, interest);
         Long type = saving ? accountRepository.getTypeId(SAVING) : accountRepository.getTypeId(SPENDING);
 
         AccountValidator accountValidator = new AccountValidator(acc);

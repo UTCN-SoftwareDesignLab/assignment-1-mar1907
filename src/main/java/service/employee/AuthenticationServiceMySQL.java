@@ -25,7 +25,6 @@ public class AuthenticationServiceMySQL implements AuthenticationService {
     }
 
 
-    //TODO rethink validators?
     @Override
     public Notification<Boolean> register(String username, String password) {
         Role employeeRole = rightsRolesRepository.findRoleByTitle(EMPLOYEE);
@@ -56,11 +55,6 @@ public class AuthenticationServiceMySQL implements AuthenticationService {
     }
 
 
-    //TODO eliminate?
-    @Override
-    public boolean logout(Employee user) {
-        return false;
-    }
 
     public String encodePassword(String password) {
         try {

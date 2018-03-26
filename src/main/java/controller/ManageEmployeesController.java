@@ -3,6 +3,7 @@ package controller;
 import model.validation.Notification;
 import service.Service;
 import service.employee.EmployeeService;
+import service.log.LogService;
 import view.ManageEmployeesView;
 import view.View;
 
@@ -15,12 +16,14 @@ public class ManageEmployeesController  extends Controller{
 
     private ManageEmployeesView manageEmployeesView;
     private EmployeeService employeeService;
+    private LogService logService;
 
     public ManageEmployeesController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
         try {
             manageEmployeesView = (ManageEmployeesView) viewMap.get("manageEmployeesView");
             employeeService = (EmployeeService) serviceMap.get("employeeService");
+            logService = (LogService) serviceMap.get("logService");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -41,6 +44,7 @@ public class ManageEmployeesController  extends Controller{
         @Override
         public void actionPerformed(ActionEvent e) {
             manageEmployeesView.sendData(employeeService.getEmployeeData());
+            logService.saveLog("View employees");
         }
     }
 
@@ -60,6 +64,7 @@ public class ManageEmployeesController  extends Controller{
                     JOptionPane.showMessageDialog(manageEmployeesView.getContentPane(), "Employee addition not successful");
                 } else {
                     JOptionPane.showMessageDialog(manageEmployeesView.getContentPane(), "Employee addition successful!");
+                    logService.saveLog("Added new employee");
                 }
             }
         }
@@ -87,6 +92,7 @@ public class ManageEmployeesController  extends Controller{
                     JOptionPane.showMessageDialog(manageEmployeesView.getContentPane(), "Employee update not successful");
                 } else {
                     JOptionPane.showMessageDialog(manageEmployeesView.getContentPane(), "Employee update successful!");
+                    logService.saveLog("Updated employee");
                 }
             }
         }
@@ -111,6 +117,7 @@ public class ManageEmployeesController  extends Controller{
                     JOptionPane.showMessageDialog(manageEmployeesView.getContentPane(), "Employee delete not successful");
                 } else {
                     JOptionPane.showMessageDialog(manageEmployeesView.getContentPane(), "Employee delete successful!");
+                    logService.saveLog("Deleted employee");
                 }
             }
         }

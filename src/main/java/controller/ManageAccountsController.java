@@ -3,6 +3,7 @@ package controller;
 import model.validation.Notification;
 import service.Service;
 import service.account.AccountService;
+import service.log.LogService;
 import view.ManageAccountsView;
 import view.View;
 
@@ -15,6 +16,7 @@ public class ManageAccountsController extends Controller {
 
     private ManageAccountsView manageAccountsView;
     private AccountService accountService;
+    private LogService logService;
 
     public ManageAccountsController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
@@ -22,6 +24,7 @@ public class ManageAccountsController extends Controller {
         try{
             manageAccountsView = (ManageAccountsView) viewMap.get("manageAccountsView");
             accountService = (AccountService) serviceMap.get("accountService");
+            logService = (LogService) serviceMap.get("logService");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -43,6 +46,7 @@ public class ManageAccountsController extends Controller {
         public void actionPerformed(ActionEvent e) {
             String text = accountService.getAccountData();
             manageAccountsView.sendText(text);
+            logService.saveLog("View accounts");
         }
     }
 
@@ -64,6 +68,7 @@ public class ManageAccountsController extends Controller {
                         JOptionPane.showMessageDialog(manageAccountsView.getContentPane(), "Could not add account");
                     } else {
                         JOptionPane.showMessageDialog(manageAccountsView.getContentPane(), "Account added!");
+                        logService.saveLog("Added new account");
                     }
                 }
             } catch (NumberFormatException ex){
@@ -91,6 +96,7 @@ public class ManageAccountsController extends Controller {
                         JOptionPane.showMessageDialog(manageAccountsView.getContentPane(), "Could not update account");
                     } else {
                         JOptionPane.showMessageDialog(manageAccountsView.getContentPane(), "Account updated!");
+                        logService.saveLog("Updated account");
                     }
                 }
             } catch (NumberFormatException ex){
@@ -113,6 +119,7 @@ public class ManageAccountsController extends Controller {
                         JOptionPane.showMessageDialog(manageAccountsView.getContentPane(), "Could not delete account");
                     } else {
                         JOptionPane.showMessageDialog(manageAccountsView.getContentPane(), "Account deleted!");
+                        logService.saveLog("Deleted account");
                     }
                 }
             } catch (NumberFormatException ex){

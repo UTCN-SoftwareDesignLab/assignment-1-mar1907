@@ -2,6 +2,7 @@ package controller;
 
 import model.validation.Notification;
 import service.Service;
+import service.log.LogService;
 import service.transfer.TransferService;
 import view.TransferView;
 import view.View;
@@ -15,6 +16,7 @@ public class TransferController extends Controller {
 
     private TransferView transferView;
     private TransferService transferService;
+    private LogService logService;
 
     public TransferController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
@@ -22,6 +24,7 @@ public class TransferController extends Controller {
         try{
             this.transferView = (TransferView) viewMap.get("transferView");
             this.transferService = (TransferService) serviceMap.get("transferService");
+            this.logService = (LogService) serviceMap.get("logService");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -59,6 +62,7 @@ public class TransferController extends Controller {
                     JOptionPane.showMessageDialog(transferView.getContentPane(), "Transfer not successful");
                 } else {
                     JOptionPane.showMessageDialog(transferView.getContentPane(), "Transfer successful!");
+                    logService.saveLog("Transfer money");
                 }
             }
         }

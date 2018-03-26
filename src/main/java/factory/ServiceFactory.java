@@ -7,6 +7,8 @@ import repository.bill.BillRepository;
 import repository.bill.BillRepositoryMySQL;
 import repository.client.ClientRepository;
 import repository.client.ClientRepositoryMySQL;
+import repository.log.LogRepository;
+import repository.log.LogRepositoryMySQL;
 import repository.security.RightsRolesRepository;
 import repository.security.RightsRolesRepositoryMySQL;
 import repository.employee.EmployeeRepository;
@@ -21,6 +23,8 @@ import service.employee.AuthenticationService;
 import service.employee.AuthenticationServiceMySQL;
 import service.employee.EmployeeService;
 import service.employee.EmployeeServiceMySQL;
+import service.log.LogService;
+import service.log.LogServiceMySQL;
 import service.options.OptionServiceImpl;
 import service.options.OptionsService;
 import service.transfer.TransferService;
@@ -37,13 +41,15 @@ public class ServiceFactory {
     private final AccountService accountService;
     private final TransferService transferService;
     private final BillService billService;
+    private final EmployeeService employeeService;
+    private final LogService logService;
 
     private final EmployeeRepository userRepository;
     private final RightsRolesRepository rightsRolesRepository;
     private final ClientRepository clientRepository;
     private final AccountRepository accountRepository;
     private final BillRepository billRepository;
-    private final EmployeeService employeeService;
+    private final LogRepository logRepository;
 
     private static ServiceFactory instance;
 
@@ -73,6 +79,9 @@ public class ServiceFactory {
         this.billService = new BillServiceMySQL(accountRepository,billRepository);
 
         this.employeeService = new EmployeeServiceMySQL(userRepository,rightsRolesRepository,authenticationService);
+
+        this.logRepository = new LogRepositoryMySQL(connection);
+        this.logService = new LogServiceMySQL(logRepository);
     }
 
     public AuthenticationService getAuthenticationService() {
@@ -109,5 +118,9 @@ public class ServiceFactory {
 
     public EmployeeService getEmployeeService() {
         return employeeService;
+    }
+
+    public LogService getLogService() {
+        return logService;
     }
 }

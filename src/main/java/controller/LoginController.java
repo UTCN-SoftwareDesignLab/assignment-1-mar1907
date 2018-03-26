@@ -5,6 +5,7 @@ import model.validation.Notification;
 import repository.employee.AuthenticationException;
 import service.Service;
 import service.employee.AuthenticationService;
+import service.log.LogService;
 import service.options.OptionsService;
 import view.LoginView;
 import view.OptionsView;
@@ -21,6 +22,7 @@ public class LoginController extends Controller{
     private AuthenticationService authenticationService;
     private OptionsService optionsService;
     private OptionsController optionsController;
+    private LogService logService;
 
     public LoginController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
@@ -29,6 +31,7 @@ public class LoginController extends Controller{
             this.optionsService = (OptionsService) serviceMap.get("optionsService");
             this.authenticationService = (AuthenticationService) serviceMap.get("authenticationService");
             this.optionsController = (OptionsController) controllerMap.get("optionsController");
+            this.logService = (LogService) serviceMap.get("logService");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -64,6 +67,8 @@ public class LoginController extends Controller{
                     loginView.dispose();
                     optionsController.setButtonDisplayList(optionsService.getOptions(loginNotification.getResult()));
                     optionsController.display();
+                    logService.setEmpId(loginNotification.getResult().getId());
+                    logService.saveLog("Log In");
                 }
             }
         }

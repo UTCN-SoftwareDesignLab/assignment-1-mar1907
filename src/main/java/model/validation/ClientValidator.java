@@ -35,7 +35,6 @@ public class ClientValidator {
 
     private void validateName(String name){
         if (!Pattern.compile(NAME_REGEX).matcher(name).matches()) {
-            System.out.println(name);
             errors.add("Invalid name!");
         }
     }

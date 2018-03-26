@@ -125,6 +125,7 @@ public class SQLTableCreationFactory {
                         "  id INT NOT NULL AUTO_INCREMENT," +
                         "  employee_id INT NOT NULL," +
                         "  text varchar(500) NOT NULL," +
+                        "  moment datetime NOT NULL," +
                         "  PRIMARY KEY (id)," +
                         "  UNIQUE INDEX id_UNIQUE (id ASC)," +
                         "  CONSTRAINT logemployee_fkid" +

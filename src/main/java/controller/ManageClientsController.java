@@ -3,6 +3,7 @@ package controller;
 import model.validation.Notification;
 import service.Service;
 import service.client.ClientService;
+import service.log.LogService;
 import view.ManageClientsView;
 import view.View;
 
@@ -16,6 +17,7 @@ public class ManageClientsController extends Controller {
 
     private ManageClientsView manageClientsView;
     private ClientService clientService;
+    private LogService logService;
 
     public ManageClientsController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
@@ -23,6 +25,7 @@ public class ManageClientsController extends Controller {
         try {
             this.manageClientsView = (ManageClientsView) viewMap.get("manageClientsView");
             this.clientService = (ClientService) serviceMap.get("clientService");
+            this.logService = (LogService) serviceMap.get("logService");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -43,6 +46,7 @@ public class ManageClientsController extends Controller {
         public void actionPerformed(ActionEvent e) {
             String clientsData = clientService.getClientsData();
             manageClientsView.sendClientsData(clientsData);
+            logService.saveLog("View clients");
         }
     }
 
@@ -62,6 +66,7 @@ public class ManageClientsController extends Controller {
                     JOptionPane.showMessageDialog(manageClientsView.getContentPane(), "Client addition not successful");
                 } else {
                     JOptionPane.showMessageDialog(manageClientsView.getContentPane(), "Client addition successful!");
+                    logService.saveLog("Added new client");
                 }
             }
         }
@@ -90,6 +95,7 @@ public class ManageClientsController extends Controller {
                     JOptionPane.showMessageDialog(manageClientsView.getContentPane(), "Client update not successful");
                 } else {
                     JOptionPane.showMessageDialog(manageClientsView.getContentPane(), "Client update successful!");
+                    logService.saveLog("Updated client");
                 }
             }
         }

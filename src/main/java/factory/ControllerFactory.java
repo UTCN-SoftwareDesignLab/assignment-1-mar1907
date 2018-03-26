@@ -35,6 +35,7 @@ public class ControllerFactory {
         Map<String, Service> serviceMap = new HashMap<>();
         serviceMap.put("authenticationService", serviceFactory.getAuthenticationService());
         serviceMap.put("optionsService", serviceFactory.getOptionsService());
+        serviceMap.put("logService", serviceFactory.getLogService());
 
         Map<String, View> viewMap = new HashMap<>();
         viewMap.put("loginView", viewFactory.getLoginView());
@@ -66,6 +67,7 @@ public class ControllerFactory {
 
         Map<String, Service> serviceMap = new HashMap<>();
         serviceMap.put("clientService", serviceFactory.getClientService());
+        serviceMap.put("logService", serviceFactory.getLogService());
 
         return new ManageClientsController(null, viewMap, serviceMap);
     }
@@ -76,6 +78,7 @@ public class ControllerFactory {
 
         Map<String, Service> serviceMap = new HashMap<>();
         serviceMap.put("accountService", serviceFactory.getAccountService());
+        serviceMap.put("logService", serviceFactory.getLogService());
 
         return new ManageAccountsController(null, viewMap, serviceMap);
     }
@@ -86,6 +89,7 @@ public class ControllerFactory {
 
         Map<String, Service> serviceMap = new HashMap<>();
         serviceMap.put("billService",serviceFactory.getBillService());
+        serviceMap.put("logService", serviceFactory.getLogService());
 
         return new PayBillController(null, viewMap, serviceMap);
     }
@@ -96,6 +100,7 @@ public class ControllerFactory {
 
         Map<String, Service> serviceMap = new HashMap<>();
         serviceMap.put("transferService", serviceFactory.getTransferService());
+        serviceMap.put("logService", serviceFactory.getLogService());
 
         return new TransferController(null, viewMap, serviceMap);
     }
@@ -106,6 +111,7 @@ public class ControllerFactory {
 
         Map<String, Service> serviceMap = new HashMap<>();
         serviceMap.put("employeeService",serviceFactory.getEmployeeService());
+        serviceMap.put("logService", serviceFactory.getLogService());
 
         return new ManageEmployeesController(null, viewMap, serviceMap);
     }
@@ -115,7 +121,7 @@ public class ControllerFactory {
         viewMap.put("generateReportView", viewFactory.getGenerateReportView());
 
         Map<String, Service> serviceMap = new HashMap<>();
-        //TODO add service
+        serviceMap.put("logService", serviceFactory.getLogService());
 
         return new GenerateReportController(null, viewMap, serviceMap);
     }

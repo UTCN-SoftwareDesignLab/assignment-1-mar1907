@@ -3,6 +3,7 @@ package controller;
 import model.validation.Notification;
 import service.Service;
 import service.bill.BillService;
+import service.log.LogService;
 import view.PayBillView;
 import view.View;
 
@@ -15,6 +16,7 @@ public class PayBillController extends Controller {
 
     private PayBillView payBillView;
     private BillService billService;
+    private LogService logService;
 
     public PayBillController(Map<String, Controller> controllerMap, Map<String, View> viewMap, Map<String, Service> serviceMap) {
         super(controllerMap, viewMap, serviceMap);
@@ -22,6 +24,7 @@ public class PayBillController extends Controller {
         try{
             payBillView = (PayBillView) viewMap.get("payBillView");
             billService = (BillService) serviceMap.get("billService");
+            logService = (LogService) serviceMap.get("logService");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -59,6 +62,7 @@ public class PayBillController extends Controller {
                     JOptionPane.showMessageDialog(payBillView.getContentPane(), "Payment not successful");
                 } else {
                     JOptionPane.showMessageDialog(payBillView.getContentPane(), "Payment successful!");
+                    logService.saveLog("Paid bill");
                 }
             }
         }

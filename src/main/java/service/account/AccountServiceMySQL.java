@@ -12,6 +12,9 @@ import repository.account.AccountRepository;
 
 import java.util.List;
 
+import static database.Constants.Types.SAVING;
+import static database.Constants.Types.SPENDING;
+
 public class AccountServiceMySQL implements AccountService {
 
     private AccountRepository accountRepository;
@@ -34,7 +37,7 @@ public class AccountServiceMySQL implements AccountService {
     @Override
     public Notification<Boolean> insertAccount(int amount, long clientID, boolean saving, double interest) {
         Account acc = formAccount(amount, saving, interest);
-        Long type = saving ? accountRepository.getTypeId("Saving") : accountRepository.getTypeId("Spending");
+        Long type = saving ? accountRepository.getTypeId(SAVING) : accountRepository.getTypeId(SPENDING);
 
         AccountValidator accountValidator = new AccountValidator(acc);
         boolean accountValid = accountValidator.validate();
@@ -59,46 +62,33 @@ public class AccountServiceMySQL implements AccountService {
                 .build();
     }
 
+    private Account formAccount(long id, int amount, boolean saving, double interest) {
+        return saving ? new SavingsAccountBuilder()
+                .setInterest(interest)
+                .setAmount(amount)
+                .build() : new AccountBuilder()
+                .setAmount(amount)
+                .build();
+    }
+
     @Override
     public Notification<Boolean> updateAccount(long id, int amount, long clientID, boolean saving, double interest) {
-        if (saving) {
-            SavingsAccount savingsAccount = (SavingsAccount) new SavingsAccountBuilder()
-                    .setInterest(interest)
-                    .setID(id)
-                    .setAmount(amount)
-                    .build();
+        Account acc = formAccount(amount, saving, interest);
+        Long type = saving ? accountRepository.getTypeId(SAVING) : accountRepository.getTypeId(SPENDING);
 
-            SavingsAccountValidator savingsAccountValidator = new SavingsAccountValidator(savingsAccount);
-            boolean accountValid = savingsAccountValidator.validate();
-            Notification<Boolean> notification = new Notification<>();
+        AccountValidator accountValidator = new AccountValidator(acc);
+        boolean accountValid = accountValidator.validate();
+        Notification<Boolean> notification = new Notification<>();
 
-            if (!accountValid) {
-                savingsAccountValidator.getErrors().forEach(notification::addError);
-                notification.setResult(Boolean.FALSE);
-                return notification;
-            } else {
-                notification.setResult(accountRepository.updateAccount(savingsAccount, clientID, accountRepository.getTypeId("Saving")));
-                return notification;
-            }
+        if (!accountValid) {
+            accountValidator.getErrors().forEach(notification::addError);
+            notification.setResult(Boolean.FALSE);
+            return notification;
         } else {
-            Account account = new AccountBuilder()
-                    .setID(id)
-                    .setAmount(amount)
-                    .build();
-
-            AccountValidator accountValidator = new AccountValidator(account);
-            boolean accountValid = accountValidator.validate();
-            Notification<Boolean> notification = new Notification<>();
-
-            if (!accountValid) {
-                accountValidator.getErrors().forEach(notification::addError);
-                notification.setResult(Boolean.FALSE);
-                return notification;
-            } else {
-                notification.setResult(accountRepository.updateAccount(account, clientID, accountRepository.getTypeId("Spending")));
-                return notification;
-            }
+            notification.setResult(accountRepository.updateAccount(acc, clientID, type));
+            return notification;
         }
+
     }
 
     @Override

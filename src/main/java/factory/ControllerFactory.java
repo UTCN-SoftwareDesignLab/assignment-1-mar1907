@@ -85,7 +85,7 @@ public class ControllerFactory {
         viewMap.put("payBillView", viewFactory.getPayBillView());
 
         Map<String, Service> serviceMap = new HashMap<>();
-        //TODO add services
+        serviceMap.put("billService",serviceFactory.getBillService());
 
         return new PayBillController(null, viewMap, serviceMap);
     }
@@ -95,7 +95,7 @@ public class ControllerFactory {
         viewMap.put("transferView", viewFactory.getTransferView());
 
         Map<String, Service> serviceMap = new HashMap<>();
-        //TODO add service
+        serviceMap.put("transferService", serviceFactory.getTransferService());
 
         return new TransferController(null, viewMap, serviceMap);
     }
@@ -105,7 +105,7 @@ public class ControllerFactory {
         viewMap.put("manageEmployeesView", viewFactory.getManageEmployeesView());
 
         Map<String, Service> serviceMap = new HashMap<>();
-        //TODO add service
+        serviceMap.put("employeeService",serviceFactory.getEmployeeService());
 
         return new ManageEmployeesController(null, viewMap, serviceMap);
     }

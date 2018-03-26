@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
 
 public class TransferView extends View {
     private JPanel contentPane;
@@ -44,5 +45,21 @@ public class TransferView extends View {
 
         btnDelete = new JButton("Transfer");
         contentPane.add(btnDelete);
+    }
+
+    public void addTransferActionListener(ActionListener al){
+        btnDelete.addActionListener(al);
+    }
+
+    public String getAccount1id(){
+        return textField_1.getText();
+    }
+
+    public String getAccount2id(){
+        return textField_2.getText();
+    }
+
+    public String getTAmount(){
+        return textField.getText();
     }
 }

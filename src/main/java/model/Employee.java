@@ -49,4 +49,9 @@ public class Employee {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return id + " " + username + " ";
+    }
 }

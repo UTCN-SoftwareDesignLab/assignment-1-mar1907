@@ -15,5 +15,5 @@ public interface EmployeeRepository {
 
     boolean update(Employee employee);
 
-    void removeAll();
+    boolean delete(Employee employee);
 }

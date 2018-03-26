@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
 
 public class PayBillView extends View {
 
@@ -44,6 +45,22 @@ public class PayBillView extends View {
         btnDelete = new JButton("Pay");
         contentPane.add(btnDelete);
 
+    }
+
+    public void addPayBillActionListener(ActionListener al){
+        btnDelete.addActionListener(al);
+    }
+
+    public String getPAmount(){
+        return textField.getText();
+    }
+
+    public String getText(){
+        return textField_1.getText();
+    }
+
+    public String getAccountId(){
+        return textField_2.getText();
     }
 
 }

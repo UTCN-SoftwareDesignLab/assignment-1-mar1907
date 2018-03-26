@@ -74,7 +74,13 @@ public class ManageClientsController extends Controller {
             String name = manageClientsView.getCName();
             String idCard = manageClientsView.getIdCard();
             String cnp = manageClientsView.getCNP();
-            Long id = Long.parseLong(manageClientsView.getCId());
+            Long id;
+            try {
+                id = Long.parseLong(manageClientsView.getCId());
+            } catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(manageClientsView.getContentPane(), "Improper number entered");
+                return;
+            }
 
             Notification<Boolean> registerNotification = clientService.updateClient(id,name,idCard,cnp);
             if (registerNotification.hasErrors()) {

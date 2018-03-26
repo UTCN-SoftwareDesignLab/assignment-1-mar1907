@@ -117,12 +117,19 @@ public class EmployeeRepositoryMySQL implements EmployeeRepository {
     }
 
     @Override
-    public void removeAll() {
+    public boolean delete(Employee employee) {
         try{
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM " + EMPLOYEE + "WHERE id>=0");
+            PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM " + EMPLOYEE + " WHERE id=?"
+            );
+            statement.setLong(1,employee.getId());
+
             statement.executeUpdate();
+
+            return true;
         } catch (SQLException e){
             e.printStackTrace();
+            return false;
         }
     }
 }

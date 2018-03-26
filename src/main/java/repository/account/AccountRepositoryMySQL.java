@@ -1,6 +1,7 @@
 package repository.account;
 
 import model.Account;
+import model.Client;
 import model.SavingsAccount;
 import model.builder.AccountBuilder;
 import model.builder.SavingsAccountBuilder;
@@ -125,8 +126,6 @@ public class AccountRepositoryMySQL implements AccountRepository {
                 statement.setLong(2, clientID);
                 statement.setLong(3,typeId);
                 statement.setLong(4,account.getId());
-
-                System.out.println(statement);
             }
 
             statement.executeUpdate();
@@ -152,6 +151,29 @@ public class AccountRepositoryMySQL implements AccountRepository {
         } catch (SQLException e){
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public Account getAccount(long id) {
+        try{
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM " + ACCOUNT + " WHERE id=?"
+            );
+            statement.setLong(1,id);
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+
+            Account account = new AccountBuilder()
+                    .setID(id)
+                    .setAmount(resultSet.getInt("amount"))
+                    .build();
+
+            return account;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -186,6 +208,25 @@ public class AccountRepositoryMySQL implements AccountRepository {
 
             resultSet.next();
             return resultSet.getLong("client_id");
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
+    @Override
+    public long getAccountType(long accountId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT type_id FROM " + ACCOUNT + " WHERE id=?"
+            );
+            statement.setLong(1,accountId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            resultSet.next();
+            return resultSet.getLong("type_id");
         } catch (SQLException e){
             e.printStackTrace();
         }

@@ -11,5 +11,7 @@ public interface AuthenticationService extends Service{
 
     Notification<Employee> login(String username, String password) throws AuthenticationException;
 
+    String encodePassword(String password);
+
     boolean logout(Employee user);
 }

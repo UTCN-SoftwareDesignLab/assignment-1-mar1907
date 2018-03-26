@@ -48,12 +48,12 @@ public class SQLTableCreationFactory {
                         "  id INT NOT NULL AUTO_INCREMENT," +
                         "  amount int NOT NULL," +
                         "  description varchar(500) NOT NULL," +
-                        "  client_id INT NOT NULL," +
+                        "  account_id INT NOT NULL," +
                         "  PRIMARY KEY (id)," +
                         "  UNIQUE KEY id_UNIQUE (id)," +
-                        "  CONSTRAINT billclient_id" +
-                        "    FOREIGN KEY (client_id)" +
-                        "    REFERENCES client (id)" +
+                        "  CONSTRAINT billaccount_id" +
+                        "    FOREIGN KEY (account_id)" +
+                        "    REFERENCES account (id)" +
                         "    ON DELETE CASCADE" +
                         "    ON UPDATE CASCADE);";
 

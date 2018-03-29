@@ -4,10 +4,13 @@ import model.Employee;
 import model.Role;
 import repository.account.AccountRepository;
 import repository.account.AccountRepositoryMySQL;
+import repository.client.ClientRepositoryMySQL;
 import repository.employee.EmployeeRepository;
 import repository.employee.EmployeeRepositoryMySQL;
 import repository.security.RightsRolesRepository;
 import repository.security.RightsRolesRepositoryMySQL;
+import service.client.ClientService;
+import service.client.ClientServiceMySQL;
 import service.employee.AuthenticationService;
 import service.employee.AuthenticationServiceMySQL;
 
@@ -32,6 +35,7 @@ public class Bootstrap {
     private static EmployeeRepository employeeRepository;
     private static AuthenticationService authenticationService;
     private static AccountRepository accountRepository;
+    private static ClientService clientService;
 
     public static void main(String[] args) throws SQLException{
         dropAll();
@@ -39,7 +43,6 @@ public class Bootstrap {
         bootstrapTables();
 
         bootstrapUserData();
-        //TODO bootstrap user data?
     }
 
     private static void dropAll() throws SQLException{
@@ -98,12 +101,14 @@ public class Bootstrap {
             employeeRepository = new EmployeeRepositoryMySQL(connectionWrapper.getConnection(), rightsRolesRepository);
             authenticationService = new AuthenticationServiceMySQL(employeeRepository, rightsRolesRepository);
             accountRepository = new AccountRepositoryMySQL(connectionWrapper.getConnection());
+            clientService = new ClientServiceMySQL(new ClientRepositoryMySQL(connectionWrapper.getConnection()));
 
             bootstrapRoles();
             bootstrapRights();
             bootstrapRoleRight();
             bootstrapUserRoles();
             bootstrapAccountTypes();
+            bootstrapClients();
         }
     }
 
@@ -159,6 +164,11 @@ public class Bootstrap {
         for(String type: TYPES){
             accountRepository.addType(type);
         }
+    }
+
+    private static void bootstrapClients(){
+        clientService.insertClient("Marius", "MS123456", "1234567890123");
+        clientService.insertClient("Supuran", "SM123456", "1234567890098");
     }
 
 }

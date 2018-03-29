@@ -10,11 +10,7 @@ public interface ClientService extends Service{
 
     String getClientsData();
 
-    Notification<Client> getClient(Long clientId);
-
     Notification<Boolean> insertClient(String name, String idCard, String cnp);
 
     Notification<Boolean> updateClient(Long clientId, String name, String idCard, String cnp);
-
-    Notification<Boolean> deleteClient(Long clientId);
 }

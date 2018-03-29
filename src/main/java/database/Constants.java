@@ -63,8 +63,8 @@ public class Constants {
     }
 
     public static class Employees {
-        public static final List<String> ADMIN_USER = new ArrayList<>(Arrays.asList("Admin User", "parola"));
-        public static final List<String > EMP_USER = new ArrayList<>(Arrays.asList("Emp User", "parola2"));
+        public static final List<String> ADMIN_USER = new ArrayList<>(Arrays.asList("Admin User", "parola1!"));
+        public static final List<String > EMP_USER = new ArrayList<>(Arrays.asList("Emp User", "parola2!"));
 
         public static final List<List<String>> EMPLOYEES = new ArrayList<>(Arrays.asList(ADMIN_USER, EMP_USER));
     }

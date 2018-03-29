@@ -28,11 +28,6 @@ public class ClientServiceMySQL implements ClientService {
     }
 
     @Override
-    public Notification<Client> getClient(Long clientId) {
-        return null;
-    }
-
-    @Override
     public Notification<Boolean> insertClient(String name, String idCard, String cnp) {
         Client client = new ClientBuilder()
                 .setName(name)
@@ -76,10 +71,5 @@ public class ClientServiceMySQL implements ClientService {
             notification.setResult(clientRepository.update(client));
             return notification;
         }
-    }
-
-    @Override
-    public Notification<Boolean> deleteClient(Long clientId) {
-        return null;
     }
 }
